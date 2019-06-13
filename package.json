@@ -1,0 +1,21 @@
+{
+  "name": "nodelastic",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "nodemon -r dotenv/config ./bin/www",
+    "prod": "node -r dotenv/config ./bin/www"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "debug": "~2.6.9",
+    "dotenv": "^8.0.0",
+    "elasticsearch": "^16.1.1",
+    "express": "~4.16.1",
+    "http-errors": "~1.6.3",
+    "morgan": "~1.9.1"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.1"
+  }
+}
