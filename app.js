@@ -5,6 +5,7 @@ const express     = require('express');
 const logger      = require('morgan');
 const cors        = require('cors');
 const elastic     = require('./elastic');
+const verify      = require('./elastic/verify');
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 
@@ -18,6 +19,17 @@ app.use(express.urlencoded({extended: false}));
 app.use(cors());
 
 elastic.init();
+
+async function indexData() {
+    const articlesRaw = await fs.readFileSync('./data.json');
+    const articles    = JSON.parse(articlesRaw);
+    console.log(`${articles.length} items parsed from data file`);
+    elastic.bulkIndex('library', 'article', articles);
+}
+
+indexData();
+verify();
+
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
